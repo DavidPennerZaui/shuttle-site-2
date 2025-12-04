@@ -1,1 +1,282 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zaui Shuttles Clone</title>
+    
+    <!-- 1. Load Tailwind CSS (No install needed) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 2. Load Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        /* Smooth scrolling for anchor links */
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="font-sans text-gray-900 bg-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/90 backdrop-blur-md z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-2xl font-bold tracking-tight">Zaui<span class="text-blue-600">Shuttles</span></span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#routes" class="text-gray-600 hover:text-blue-600 font-medium transition">Routes</a>
+                    <a href="#fleet" class="text-gray-600 hover:text-blue-600 font-medium transition">Fleet</a>
+                    <a href="#destinations" class="text-gray-600 hover:text-blue-600 font-medium transition">Destinations</a>
+                    <button class="bg-blue-600 text-white px-5 py-2.5 rounded-full font-semibold hover:bg-blue-700 transition shadow-lg shadow-blue-600/20">
+                        Book Now
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-gray-900 focus:outline-none">
+                        <i data-lucide="menu" class="w-7 h-7"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-100 absolute w-full">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#routes" class="block px-3 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-lg">Routes</a>
+                <a href="#fleet" class="block px-3 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-lg">Fleet</a>
+                <a href="#destinations" class="block px-3 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-lg">Destinations</a>
+                <div class="pt-2">
+                    <button class="w-full bg-blue-600 text-white px-5 py-3 rounded-lg font-semibold text-center">
+                        Book Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative pt-20 pb-16 md:pt-32 md:pb-24 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="lg:w-1/2">
+                <div class="inline-flex items-center px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-sm font-bold mb-6">
+                    <span class="mr-2">NEW</span> Powered by Zaui Booking Engine
+                </div>
+                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900 mb-6 leading-tight">
+                    Mountain Transfers. <br/>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
+                        Seamlessly Booked.
+                    </span>
+                </h1>
+                <p class="mt-4 text-xl text-gray-600 mb-8 max-w-lg leading-relaxed">
+                    Experience the ultimate in travel predictability. From dynamic pricing to route optimization, we handle the logistics so you can enjoy the journey.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button class="px-8 py-4 bg-gray-900 text-white rounded-xl font-bold hover:bg-gray-800 transition flex items-center justify-center">
+                        Check Live Schedule
+                        <i data-lucide="chevron-right" class="ml-2 w-5 h-5"></i>
+                    </button>
+                    <button class="px-8 py-4 bg-white text-gray-900 border-2 border-gray-200 rounded-xl font-bold hover:border-gray-300 transition flex items-center justify-center">
+                        Group Bookings
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Abstract Background Elements -->
+        <div class="absolute top-0 right-0 -z-10 w-1/2 h-full hidden lg:block bg-gray-50 rounded-l-[4rem]">
+           <div class="absolute inset-0 flex items-center justify-center text-gray-200">
+             <i data-lucide="bus" style="width: 400px; height: 400px; stroke-width: 0.5;"></i>
+           </div>
+        </div>
+    </div>
+
+    <!-- Booking Widget Section -->
+    <div class="bg-gray-900 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-2xl p-6 md:p-8 shadow-2xl transform md:-translate-y-24">
+                <h3 class="text-lg font-bold text-gray-900 mb-6 border-b pb-4">Find Your Shuttle</h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <!-- From -->
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 hover:border-blue-300 transition cursor-pointer group">
+                        <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide">From</label>
+                        <div class="flex items-center mt-1 text-gray-900 font-semibold group-hover:text-blue-600">
+                            <i data-lucide="map-pin" class="w-5 h-5 mr-2 text-blue-500"></i>
+                            Vancouver Int'l
+                        </div>
+                    </div>
+                    <!-- To -->
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 hover:border-blue-300 transition cursor-pointer group">
+                        <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide">To</label>
+                        <div class="flex items-center mt-1 text-gray-900 font-semibold group-hover:text-blue-600">
+                            <i data-lucide="map-pin" class="w-5 h-5 mr-2 text-indigo-500"></i>
+                            Whistler Village
+                        </div>
+                    </div>
+                    <!-- Date -->
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 hover:border-blue-300 transition cursor-pointer group">
+                        <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide">Date</label>
+                        <div class="flex items-center mt-1 text-gray-900 font-semibold group-hover:text-blue-600">
+                            <i data-lucide="calendar" class="w-5 h-5 mr-2 text-gray-400"></i>
+                            Dec 14, 2024
+                        </div>
+                    </div>
+                    <!-- Button -->
+                    <button class="bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition flex items-center justify-center py-4 md:py-0">
+                        Search Rides
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content Section -->
+    <div class="py-24 bg-white" id="destinations">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
+                <div class="mb-12 lg:mb-0">
+                   <div class="rounded-3xl bg-gray-100 h-96 w-full flex items-center justify-center relative overflow-hidden">
+                      <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 mix-blend-multiply"></div>
+                      <span class="text-gray-400 font-medium">Mountain Landscape Image</span>
+                   </div>
+                </div>
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                        Welcome to the Rockies.
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        From the airport to the slopes, rely on Zaui Shuttles to guarantee your schedule and comfort. Our route optimization ensures you spend less time travelling and more time experiencing.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-center text-gray-700 font-medium">
+                            <div class="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-3">
+                                <i data-lucide="check" class="w-4 h-4"></i>
+                            </div>
+                            Real-time fleet tracking
+                        </li>
+                        <li class="flex items-center text-gray-700 font-medium">
+                            <div class="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-3">
+                                <i data-lucide="check" class="w-4 h-4"></i>
+                            </div>
+                            Luggage handling included
+                        </li>
+                        <li class="flex items-center text-gray-700 font-medium">
+                            <div class="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-3">
+                                <i data-lucide="check" class="w-4 h-4"></i>
+                            </div>
+                            Free Wi-Fi on board
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="py-24 bg-gray-50 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">The Power of the Platform</h2>
+                <p class="text-gray-600 text-lg">Integrated systems that handle demand surges flawlessly.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition duration-300">
+                    <div class="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-6">
+                        <i data-lucide="bar-chart-3" class="w-8 h-8 text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Dynamic Pricing</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Smart yield management ensures the best value while optimizing every seat for revenue efficiency.
+                    </p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition duration-300">
+                    <div class="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-6">
+                        <i data-lucide="zap" class="w-8 h-8 text-amber-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Operational Control</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Real-time fleet visibility and resource allocation to handle any demand surge instantly.
+                    </p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition duration-300">
+                    <div class="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mb-6">
+                        <i data-lucide="shield-check" class="w-8 h-8 text-emerald-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Secure Checkout</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        A seamless and trusted checkout process reduces cart abandonment and secures data.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-1">
+                   <span class="text-2xl font-bold tracking-tight text-white">Zaui<span class="text-blue-500">Shuttles</span></span>
+                   <p class="mt-4 text-gray-400 text-sm">
+                     Mountain transfers made simple. Powered by industry leading technology.
+                   </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition">Careers</a></li>
+                        <li><a href="#" class="hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-4">Support</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white transition">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-4">Newsletter</h4>
+                    <div class="flex">
+                        <input type="email" placeholder="Enter email" class="bg-gray-800 border-none rounded-l-lg px-4 py-2 w-full text-sm focus:ring-1 focus:ring-blue-500 text-white">
+                        <button class="bg-blue-600 px-4 py-2 rounded-r-lg font-bold text-sm hover:bg-blue-700">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+                <p>© 2024 Zaui Solutions Clone. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Mobile Menu & Icons -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle Logic
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
